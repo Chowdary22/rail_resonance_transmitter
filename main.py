@@ -18,7 +18,7 @@ from modules.lte_transmitter import LTETransmitter
 ALERT_LED_PIN = 18
 SENSOR_FREQ = 0.05  # 20Hz
 MQTT_SEND_FREQ = 1  # 1-second upload
-SD_CARD_FILE = "/home/pi/vibration_data.csv"
+SD_CARD_FILE = "/home/logs/adxl345"
 sensor_data = {"x_axis": 0.0, "y_axis": 0.0, "z_axis": 0.0, "timestamp": 0.0}
 data_lock = threading.Lock()
 
@@ -66,7 +66,7 @@ def main():
             # 1. Preprocess
             processed = extractor.convert_to_g(raw)
 
-            # 2. Save to SD card
+            # 2. Save processed data to SD card (CSV file)
             file_exists = os.path.isfile(SD_CARD_FILE)
             with open(SD_CARD_FILE, "a", newline="") as f:
                 writer = csv.writer(f)
@@ -79,11 +79,11 @@ def main():
                     processed["z_axis"]
                 ])
 
-            # 3. Package and send
+            # 3. Package and send the preprocessed data to AI
             payload = formatter.format_csv_string(processed)
 
             if serial_com.send_ack(processed):
-                lte.publish(payload)
+                lte.publish(payload) # Send data to the AI via MQTT or HTTP
                 print(f"Sent: {payload}")
             else:
                 print("Serial ACK failed. Skipping MQTT.")
