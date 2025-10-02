@@ -1,5 +1,4 @@
-.venv/
+venv/
 __pycache__/
-*.log
-*.csv
-*.bin
+*.pyc
+/home/testuser/logs/

@@ -1,0 +1,9 @@
+[33mcommit 921a368b8c3a2b9c6569c59f3615f0da56b69029[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: smaddi <srujana.maddipatla@iprworldwide.com>
+Date:   Fri Jul 25 11:56:51 2025 +0200
+
+    Add data preprocessing and feature extraction logic
+
+ main.py                      |  8 [32m++++[m[31m----[m
+ modules/feature_extractor.py | 60 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++[m[31m---------[m
+ 2 files changed, 55 insertions(+), 13 deletions(-)
